@@ -19,7 +19,7 @@ public class Chats extends BaseEntity {
 
 
    @Column
-   private String userId;
+   private String username;
 
    @Column
    private String chatsRequest;

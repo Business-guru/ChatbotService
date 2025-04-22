@@ -12,9 +12,9 @@ import java.util.List;
 
 @Repository
 public interface ChatsRepository extends JpaRepository<Chats,Long> {
-    @Query("SELECT c FROM Chats c WHERE c.userId = :userId AND c.chatType = :chatType ORDER BY c.createdAt ASC")
-    List<Chats> findAllByUserIdAndChatTypeOrderByCreatedAtAsc(
-            @Param("userId") String userId,
+    @Query("SELECT c FROM Chats c WHERE c.username = :username AND c.chatType = :chatType ORDER BY c.createdAt ASC")
+    List<Chats> findAllByUsernameAndChatTypeOrderByCreatedAtAsc(
+            @Param("username") String username,
             @Param("chatType") ChatType chatType
     );
 

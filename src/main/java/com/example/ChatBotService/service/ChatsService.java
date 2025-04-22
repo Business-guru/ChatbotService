@@ -40,18 +40,24 @@ public class ChatsService {
             QueryRequest request= QueryRequest.builder().query(chatsDTO.getChatsRequest()).domain(chatsDTO.getDomain()).build();
             HttpEntity<QueryRequest> entity = new HttpEntity<>(request, headers);
             RestTemplate restTemplate=new RestTemplate();
-            ResponseEntity<QueryResponse> responseEntity = restTemplate.postForEntity(url, entity, QueryResponse.class);
-            if(responseEntity.getStatusCode().is2xxSuccessful()) {
-                QueryResponse queryResponse=responseEntity.getBody();
-                assert queryResponse != null;
-                String response=queryResponse.getResponse();
-                chatsDTO.setUserId(userId);
-                chatsDTO.setChatsResponse(response);
-                ModelMapper mapper = new ModelMapper();
-                chatsRepository.save(mapper.map(chatsDTO, Chats.class));
-                return responseEntity.getBody().toString();
-            }
-            else  throw  new RuntimeException();
+//          ResponseEntity<QueryResponse> responseEntity = restTemplate.postForEntity(url, entity, QueryResponse.class);
+//            if(responseEntity.getStatusCode().is2xxSuccessful()) {
+//                QueryResponse queryResponse=responseEntity.getBody();
+//                assert queryResponse != null;
+//                String response=queryResponse.getResponse();
+//                chatsDTO.setUsername(userId);
+//                chatsDTO.setChatsResponse(response);
+//                ModelMapper mapper = new ModelMapper();
+//                chatsRepository.save(mapper.map(chatsDTO, Chats.class));
+//                return responseEntity.getBody().toString();
+//            }
+      //      else  throw  new RuntimeException();
+            String response="hello";
+               chatsDTO.setUsername(userId);
+              chatsDTO.setChatsResponse(response);
+               ModelMapper mapper = new ModelMapper();
+               chatsRepository.save(mapper.map(chatsDTO, Chats.class));
+               return response;
         } catch (RestClientException e) {
             throw new RuntimeException(e);
         }
@@ -59,7 +65,7 @@ public class ChatsService {
     public List<ChatsDTO> getAllChats(String userId, ChatType chatType)
     {
         ModelMapper modelMapper=new ModelMapper();
-        List<Chats> chatsList=chatsRepository.findAllByUserIdAndChatTypeOrderByCreatedAtAsc(userId,chatType);
+        List<Chats> chatsList=chatsRepository.findAllByUsernameAndChatTypeOrderByCreatedAtAsc(userId,chatType);
         return chatsList.stream()
                 .map(user -> modelMapper.map(user,ChatsDTO.class))
                 .toList();

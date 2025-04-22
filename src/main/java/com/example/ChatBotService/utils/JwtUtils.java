@@ -25,7 +25,7 @@ public class JwtUtils {
                     .parseClaimsJws(token)
                     .getBody();
 
-            return claims.get("userId", String.class); // Extract userId
+            return claims.get("username", String.class); // Extract userId
         } catch (Exception e) {
             throw new RuntimeException("Could not extract userId from JWT");
         }

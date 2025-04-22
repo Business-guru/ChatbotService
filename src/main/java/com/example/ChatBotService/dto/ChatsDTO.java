@@ -12,7 +12,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class ChatsDTO {
    private Long id;
-   private String userId;
+   private String username;
     private String chatsRequest;
    private String chatsResponse;
    private String domain;

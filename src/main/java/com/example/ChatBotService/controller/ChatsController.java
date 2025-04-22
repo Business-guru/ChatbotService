@@ -22,15 +22,15 @@ public class ChatsController {
   public ResponseEntity<String> getChatResponse(@RequestHeader("Authorization") String token, @RequestBody ChatsDTO chatsDTO)
   {
       String parseToken=token.substring(7);
-      String userId=jwtUtils.extractUserName(parseToken);
+      String username=jwtUtils.extractUserName(parseToken);
 
-      return ResponseEntity.ok(chatsService.getChatResponse(chatsDTO,userId));
+      return ResponseEntity.ok(chatsService.getChatResponse(chatsDTO,username));
   }
     @GetMapping("/allChats/{chatType}")
     public ResponseEntity<List<ChatsDTO>> getAllChats(@RequestHeader("Authorization") String token, @PathVariable ChatType chatType)
     {
         String parseToken=token.substring(7);
-        String userId=jwtUtils.extractUserName(parseToken);
-        return ResponseEntity.ok(chatsService.getAllChats(userId,chatType));
+        String username=jwtUtils.extractUserName(parseToken);
+        return ResponseEntity.ok(chatsService.getAllChats(username,chatType));
     }
 }
