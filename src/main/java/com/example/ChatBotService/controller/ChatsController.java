@@ -11,14 +11,14 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/v1/chatService")
+@RequestMapping("service/api/v1/")
 public class ChatsController {
 
     @Autowired
     private ChatsService chatsService;
     @Autowired
     private JwtUtils jwtUtils;
-  @PostMapping("/getResponse")
+  @PostMapping("chatService/getResponse")
   public ResponseEntity<String> getChatResponse(@RequestHeader("Authorization") String token, @RequestBody ChatsDTO chatsDTO)
   {
       String parseToken=token.substring(7);
@@ -26,7 +26,7 @@ public class ChatsController {
 
       return ResponseEntity.ok(chatsService.getChatResponse(chatsDTO,username));
   }
-    @GetMapping("/allChats/{chatType}")
+    @GetMapping("chatService/allChats/{chatType}")
     public ResponseEntity<List<ChatsDTO>> getAllChats(@RequestHeader("Authorization") String token, @PathVariable ChatType chatType)
     {
         String parseToken=token.substring(7);

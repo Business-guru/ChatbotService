@@ -12,7 +12,7 @@ import java.util.List;
 import java.util.Map;
 
 @RestController
-@RequestMapping("api/v1/novels")
+@RequestMapping("service/api/v1/")
 public class NovelController {
     private final NovelService novelService;
 
@@ -20,7 +20,7 @@ public class NovelController {
         this.novelService = novelService;
     }
 
-    @PostMapping("/upload")
+    @PostMapping("novels/upload")
     public ResponseEntity<String> uploadNovel(
             @RequestParam String title,
             @RequestParam("pdf") MultipartFile pdf,
@@ -30,13 +30,13 @@ public class NovelController {
         return ResponseEntity.ok("Novel saved with ID: " + novel.getId());
     }
 
-    @GetMapping("/{id}")
+    @GetMapping("novels/{id}")
     public ResponseEntity<NovelDTO> getNovel(@PathVariable Long id) {
         Novel novel = novelService.getNovel(id);
         ModelMapper modelMapper=new ModelMapper();
         return ResponseEntity.ok(modelMapper.map(novel, NovelDTO.class));
     }
-    @GetMapping("/covers")
+    @GetMapping("novels/covers")
     public ResponseEntity<List<String>> getCoverImages() {
         List<String> novel = novelService.getAllCoverImages();
         return ResponseEntity.ok(novel);
