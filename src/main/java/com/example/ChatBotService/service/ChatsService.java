@@ -40,24 +40,19 @@ public class ChatsService {
             QueryRequest request= QueryRequest.builder().query(chatsDTO.getChatsRequest()).domain(chatsDTO.getDomain()).build();
             HttpEntity<QueryRequest> entity = new HttpEntity<>(request, headers);
             RestTemplate restTemplate=new RestTemplate();
-//          ResponseEntity<QueryResponse> responseEntity = restTemplate.postForEntity(url, entity, QueryResponse.class);
-//            if(responseEntity.getStatusCode().is2xxSuccessful()) {
-//                QueryResponse queryResponse=responseEntity.getBody();
-//                assert queryResponse != null;
-//                String response=queryResponse.getResponse();
-//                chatsDTO.setUsername(userId);
-//                chatsDTO.setChatsResponse(response);
-//                ModelMapper mapper = new ModelMapper();
-//                chatsRepository.save(mapper.map(chatsDTO, Chats.class));
-//                return responseEntity.getBody().toString();
-//            }
-      //      else  throw  new RuntimeException();
-            String response="hello";
-               chatsDTO.setUsername(userId);
-              chatsDTO.setChatsResponse(response);
-               ModelMapper mapper = new ModelMapper();
-               chatsRepository.save(mapper.map(chatsDTO, Chats.class));
-               return response;
+          ResponseEntity<QueryResponse> responseEntity = restTemplate.postForEntity(url, entity, QueryResponse.class);
+            if(responseEntity.getStatusCode().is2xxSuccessful()) {
+                QueryResponse queryResponse=responseEntity.getBody();
+                assert queryResponse != null;
+                String response=queryResponse.getResponse();
+                chatsDTO.setUsername(userId);
+                chatsDTO.setChatsResponse(response);
+                ModelMapper mapper = new ModelMapper();
+                chatsRepository.save(mapper.map(chatsDTO, Chats.class));
+                return responseEntity.getBody().toString();
+            }
+            else  throw  new RuntimeException();
+
         } catch (RestClientException e) {
             throw new RuntimeException(e);
         }
