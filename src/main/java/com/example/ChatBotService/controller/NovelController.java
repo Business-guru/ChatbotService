@@ -37,9 +37,8 @@ public class NovelController {
         return ResponseEntity.ok(modelMapper.map(novel, NovelDTO.class));
     }
     @GetMapping("/covers")
-    public ResponseEntity<NovelDTO> getCoverImages(@PathVariable Long id) {
-        List<Novel> novel = novelService.getAllCoverImages();
-        ModelMapper modelMapper=new ModelMapper();
-        return ResponseEntity.ok(modelMapper.map(novel, NovelDTO.class));
+    public ResponseEntity<List<String>> getCoverImages() {
+        List<String> novel = novelService.getAllCoverImages();
+        return ResponseEntity.ok(novel);
     }
 }

@@ -38,7 +38,7 @@ public class NovelService {
         return novelRepository.findById(id).orElseThrow(() -> new RuntimeException("Novel not found"));
     }
 
-    public List<Novel> getAllCoverImages() {
-            return novelRepository.findAll();
+    public List<String> getAllCoverImages() {
+            return novelRepository.findAllImages();
     }
 }
