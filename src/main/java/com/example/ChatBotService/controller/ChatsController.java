@@ -1,6 +1,7 @@
 package com.example.ChatBotService.controller;
 
 import com.example.ChatBotService.dto.ChatsDTO;
+import com.example.ChatBotService.dto.QueryResponse;
 import com.example.ChatBotService.enums.ChatType;
 import com.example.ChatBotService.service.ChatsService;
 import com.example.ChatBotService.utils.JwtUtils;
@@ -19,7 +20,7 @@ public class ChatsController {
     @Autowired
     private JwtUtils jwtUtils;
   @PostMapping("chatService/getResponse")
-  public ResponseEntity<String> getChatResponse(@RequestHeader("Authorization") String token, @RequestBody ChatsDTO chatsDTO)
+  public ResponseEntity<QueryResponse> getChatResponse(@RequestHeader("Authorization") String token, @RequestBody ChatsDTO chatsDTO)
   {
       String parseToken=token.substring(7);
       String username=jwtUtils.extractUserName(parseToken);

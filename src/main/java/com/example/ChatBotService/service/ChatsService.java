@@ -31,7 +31,7 @@ public class ChatsService {
     private final ChatsRepository chatsRepository;
     @Value("${chatBot_Api}")
     private String url;
-    public String getChatResponse(ChatsDTO chatsDTO,String userId)
+    public QueryResponse getChatResponse(ChatsDTO chatsDTO,String userId)
     {
         try {
             HttpHeaders headers = new HttpHeaders();
@@ -57,7 +57,8 @@ public class ChatsService {
                chatsDTO.setChatsResponse(response);
                ModelMapper mapper = new ModelMapper();
                chatsRepository.save(mapper.map(chatsDTO, Chats.class));
-               return response;
+             return   QueryResponse.builder().response(response).further_questions(new ArrayList<>(List.of("abc","def"))).build();
+
         } catch (RestClientException e) {
             throw new RuntimeException(e);
         }
