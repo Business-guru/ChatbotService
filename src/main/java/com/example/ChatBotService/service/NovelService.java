@@ -2,9 +2,11 @@ package com.example.ChatBotService.service;
 
 import com.example.ChatBotService.entity.Novel;
 import com.example.ChatBotService.repository.NovelRepository;
+import org.apache.commons.lang.ObjectUtils;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.util.ArrayList;
 import java.util.Base64;
 import java.util.List;
 
@@ -39,6 +41,9 @@ public class NovelService {
     }
 
     public List<String> getAllCoverImages() {
-            return novelRepository.findAllImages();
+
+        List<String>  list=novelRepository.findAllImages();
+        if(list==null)return new ArrayList<>();
+        return list;
     }
 }
